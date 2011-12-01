@@ -18,6 +18,8 @@ sub gen_log {
 	my @short_log;
     my %svn;
     my %git;
+SVNLOG:
+	goto GITLOG unless(-d 'svn');
     open FI,'-|','svn','info',$svn_url;
 	push @full_log,<FI>;
     close FI;
@@ -39,6 +41,7 @@ sub gen_log {
     }
 	push @full_log,<FI>;
     close FI;
+GITLOG:
     push @full_log,"\nPath  : git\n";
     open FI,'-|','git','--bare','log','-1','--stat','--pretty=Date  : %ci%nAuthor: %an%nCommit: %H%n%n    %s%n%n%b';
     foreach(<FI>) {
@@ -58,11 +61,17 @@ sub gen_log {
 
     chomp($svn{comment}) if($svn{comment});
     chomp($git{comment}) if($git{comment});
-	if($svn{comment} eq $git{comment}) {
-	    push @short_log,"$name [SVN] r$svn{rev} [GIT] commit $git{commit}: $git{comment}";
+	push @short_log, "$name";
+	if($svn{comment} and ($svn{comment} eq $git{comment})) {
+	    push @short_log," [SVN] r$svn{rev} [GIT] commit $git{commit}: $git{comment}";
 	}
 	else {
-		push @short_log,"$name [SVN] r$svn{rev}: $svn{comment} [GIT] commit $git{commit}: $git{comment}";
+		if($svn{comment}) {
+			push @short_log, " [SVN] r$svn{rev}: $svn{comment}";
+		}
+		if($git{comment}) {
+			push @short_log, " [GIT] commit $git{commit}: $git{comment}";
+		}
 	}
     open FO,'>info';
 	print FO @short_log,"\n\n";
