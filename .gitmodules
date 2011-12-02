@@ -1,0 +1,18 @@
+[submodule "gm-scripts"]
+	path = gm-scripts
+	url = ./gm-scripts
+[submodule "avatars"]
+	path = avatars
+	url = ./avatars
+[submodule "babebase"]
+	path = babebase
+	url = ./babebase/
+[submodule "foxwps"]
+	path = foxwps
+	url = ./foxwps/
+[submodule "gsbridge"]
+	path = gsbridge
+	url = ./gsbridge/
+[submodule "privacy"]
+	path = privacy
+	url = ./privacy/
