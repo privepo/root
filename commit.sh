@@ -44,16 +44,16 @@ else
 	exit 1
 fi
 
-if git svn dcommit ; then
-	echo "[OK]"
-	rm status info repo.log.bak
-else
-	echo "git svn dcommit failed"
+#if git svn dcommit ; then
+#	echo "[OK]"
+#	rm status info repo.log.bak
+#else
+#	echo "git svn dcommit failed"
 	#git reset HEAD^
 	#if [ -f "repo.log.bak" ] ; then
 	#	cp -av "repo.log.bak" "repo.log"
 	#fi
 	#rm status info repo.log.bak
-	exit 1
-fi
-exit 0
+#	exit 1
+#fi
+#exit 0

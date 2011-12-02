@@ -66,11 +66,11 @@ GITLOG:
 	    push @short_log," [SVN] r$svn{rev} [GIT] commit $git{commit}: $git{comment}";
 	}
 	else {
-		if($svn{comment}) {
-			push @short_log, " [SVN] r$svn{rev}: $svn{comment}";
-		}
 		if($git{comment}) {
 			push @short_log, " [GIT] commit $git{commit}: $git{comment}";
+		}
+		if($svn{comment}) {
+			push @short_log, " [SVN] r$svn{rev}: $svn{comment}";
 		}
 	}
     open FO,'>info';
