@@ -5,8 +5,8 @@ d=`dirname "$0"`
 #svnadmin pack svn
 #git --bare --git-dir=git gc
 
-git add git
-git add svn
+[ -d "git" ] && git add git
+[ -d "svn" ] && git add svn
 
 perl "$d/genlog.pl"
 
